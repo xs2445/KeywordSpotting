@@ -1,11 +1,15 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from utils.audio_process import get_speech_sample, AudioProcessor
+import librosa
+import torch
+import os
 
 
 
 
-
-def train_val_plot(train_history, val_history, save_path=None):
+def train_val_plot(train_history, val_history, 
+        save_path=None, title='Training Loss and Validation Accuracy'):
     """
     Plotting training loss and validation accuracy togather.
 
@@ -20,7 +24,7 @@ def train_val_plot(train_history, val_history, save_path=None):
     # create figure and axis objects with subplots()
     fig,ax = plt.subplots()
     # title
-    plt.title('Training Loss and Validation Accuracy')
+    plt.title(title)
 
     # training loss
     ax.plot(range(len(train_history)), train_history, color="steelblue")
@@ -38,7 +42,7 @@ def train_val_plot(train_history, val_history, save_path=None):
     ax2=ax.twinx()
     # make a plot with different y-axis using second axis object
     ax2.plot(val_x, val_history,color="darkorange")
-    ax2.set_ylabel("Val Accuracy (%)",color="darkorange",fontsize=14)
+    ax2.set_ylabel("Val Accuracy",color="darkorange",fontsize=14)
 
     plt.show()
 
@@ -48,3 +52,4 @@ def train_val_plot(train_history, val_history, save_path=None):
                     format='jpeg',
                     dpi=100,
                     bbox_inches='tight')
+

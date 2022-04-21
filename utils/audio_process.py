@@ -5,12 +5,15 @@ import torchaudio.functional as F
 import torchaudio.transforms as T
 
 import os
+import glob
 
 import matplotlib.pyplot as plt
 import requests
 from IPython.display import Audio, display
 
 import librosa
+
+import numpy as np
 
 def get_speech_sample(path, resample=None):
     """
@@ -100,13 +103,12 @@ class AudioProcessor(object):
                                     mel_scale="htk",
                                 )
                                 
-
-                                
     def compute_mfccs(self, data):
     
         return self.transform_mfcc(data)
 
     def mel_spectrogram(self, data):
+        
         return self.transform_mel_spec(data)
     
 
@@ -128,3 +130,56 @@ def mfcc_transform(waveform, sample_rate):
     )
 
     return mfcc_transform(waveform)
+
+
+def wave_convert_save(wave_path, save_dir, representation):
+    """
+    Convert wave to spectrogram and save, from .wav to .npy with size 40*101.
+    
+    - wave_path: path of .wav file
+    - save_dir: saving directory
+    - representation: "melspec", "mfcc"
+    """
+    processor = AudioProcessor()
+    waveform, sample_rate = get_speech_sample(wave_path)
+    in_len = 16000
+    # pad to 1 second if not enough wide
+    waveform = np.pad(waveform.squeeze(), (0, max(0, in_len - waveform.shape[1])), "constant").reshape(1,-1)
+    if representation == 'melspec':
+        wave_img = processor.mel_spectrogram(torch.from_numpy(waveform)).numpy()
+    else:
+        wave_img = processor.compute_mfccs(torch.from_numpy(waveform)).numpy()
+    wave_img = librosa.power_to_db(wave_img)
+    save_path = os.path.join(save_dir,os.path.basename(wave_path[:-4])+'.npy')
+    np.save(save_path, wave_img)
+
+
+def generate_spec_dataset(
+    sound_dir, 
+    words_list=['yes', 'no', 'up', 'down', 'left', 'right', 'on', 'off', 'stop', 'go'], 
+    representation='melspec'):
+    """
+    Generate a dataset of spectrograms from waveforms.
+    The generated array has shape [1,n_filterbank, 101], default is [1,40,101]
+
+    - sound_dir: '..../speech_commands_v1/audio/'
+    - word_list: the words that wanted to be used
+    - representation: 'melspec' or 'mfcc'
+    """
+    img_dir = sound_dir[:-6] + 'imgs/' + representation + '/'
+    print("Representation:", representation)
+
+    for file in os.listdir(sound_dir):
+        if file in words_list:
+            count = 0
+            d = os.path.join(sound_dir, file)
+            save_dir = os.path.join(img_dir, file)
+            if not os.path.exists(save_dir):
+                os.makedirs(save_dir)
+            wave_paths = glob.glob(d + '/*.wav')
+            print("{}: {} files.".format(file, len(wave_paths)))
+            for wave_pth in wave_paths:
+                wave_convert_save(wave_pth, save_dir, representation)
+                count += 1
+                if count % 999 == 0:
+                    print(count, "wave files converted.")
