@@ -29,8 +29,10 @@ class SerializableModule(nn.Module):
         self.load_state_dict(torch.load(filename, map_location=lambda storage, loc: storage))
 
 class SpeechResModel(SerializableModule):
-    def __init__(self, config):
+    def __init__(self, n_class, model_type="res8"):
         super().__init__()
+        config = self.model_config(n_class, model_type)
+        self.model_name = model_type
         n_labels = config["n_labels"]
         n_maps = config["n_feature_maps"]
         self.conv0 = nn.Conv2d(1, n_maps, (3, 3), padding=(1, 1), bias=False)
@@ -73,6 +75,58 @@ class SpeechResModel(SerializableModule):
         x = self.output(x)
         # print(x.shape)
         return F.log_softmax(x, dim=1)
+
+
+    def model_config(self, n_class, model_type="res8"):
+        """
+        Type of model, should be one of:
+
+        {res8, res15, res26, res8_narrow, res15_narrow, res26_narrow}
+        """
+        if model_type == "res8":
+            return dict(
+                n_labels=n_class, 
+                n_layers=6, 
+                n_feature_maps=45, 
+                res_pool=(4, 3), 
+                use_dilation=False)
+        elif model_type == "res15":
+            return dict(
+                n_labels=n_class, 
+                use_dilation=True, 
+                n_layers=13, 
+                n_feature_maps=45)
+        elif model_type == "res26":
+            return dict(
+                n_labels=12, 
+                n_layers=24, 
+                n_feature_maps=45, 
+                res_pool=(2, 2), 
+                use_dilation=False)
+        elif model_type == "res8_narrow":
+            return dict(
+                n_labels=12, 
+                n_layers=6, 
+                n_feature_maps=19, 
+                res_pool=(4, 3), 
+                use_dilation=False)
+        elif model_type == "res15_narrow":
+            return dict(
+                n_labels=12, 
+                use_dilation=True, 
+                n_layers=13, 
+                n_feature_maps=19)
+        elif model_type == "res26_narrow":
+            return dict(
+                n_labels=12, 
+                n_layers=24, 
+                n_feature_maps=19, 
+                res_pool=(2, 2), 
+                use_dilation=False)
+        else:
+            raise Exception("Wrong model type, should be one of \
+                    {res8, res15, res26, \
+                    res8_narrow, res15_narrow, res26_narrow}")
 
 
 class CNNModel(SerializableModule):
