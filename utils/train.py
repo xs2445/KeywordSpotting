@@ -13,7 +13,7 @@ import time
 def train(
     model, 
     train_dataset, val_dataset, test_dataset, 
-    batch_size, epochs, lr,
+    batch_size, epochs, lr, weight_decay=1e-5,
     save_path=None, subset_frac=None, device=None, log_interval=100):
 
     train_loader, val_loader, test_loader = make_frac_dataloader(
@@ -31,11 +31,13 @@ def train(
 
     # optimizer = torch.optim.SGD(
     #     model.parameters(),
-    #     lr = lr[0]
+    #     lr = lr[0],
+    #     weight_decay = weight_decay
     # )
     optimizer = torch.optim.Adam(
         model.parameters(),
-        lr = lr[0]
+        lr = lr[0],
+        weight_decay = weight_decay
     )
 
     if device:

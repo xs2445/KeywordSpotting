@@ -9,6 +9,7 @@ import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 import random
+import scipy.io as sio
 
 DEFAULT_TRANSFORMS = T.Compose([
     # T.ToTensor(),
@@ -48,11 +49,17 @@ class SpectrogramDataset(Dataset):
     def __len__(self):
         return len(self.annotations)
 
+    # def __getitem__(self, index):
+    #     annotation = self.annotations[index]
+    #     spec_img = np.load(annotation['path'])
+    #     spec_img -= np.min(spec_img)
+    #     spec_img /= np.max(spec_img)
+        
+    #     return torch.tensor(spec_img), annotation['class_index']
+
     def __getitem__(self, index):
         annotation = self.annotations[index]
         spec_img = np.load(annotation['path'])
-        spec_img -= np.min(spec_img)
-        spec_img /= np.max(spec_img)
         
         return torch.tensor(spec_img), annotation['class_index']
 
@@ -118,6 +125,39 @@ class SpectrogramDataset(Dataset):
             class_index += 1
 
         return annotations, class_dict
+    
+    @classmethod
+    def mat2np(cls, path, dataset_name, save_path, class_names=None):
+        """
+        Convert matlab matrix (.mat) to numpy (.npy)
+
+        - path: './data'
+        - dataset_name: 'speech_commands_v1/mats/mat_samples'
+        - save_path: 'speech_commands_v1/imgs/np_samples'
+        """
+        
+        folder = os.path.join(path, dataset_name)
+        save_folder = os.path.join(path, save_path)
+
+        if class_names == None:
+            class_names = os.listdir(folder)
+
+        count = 0
+
+        for class_name in class_names:
+            class_path = os.path.join(folder, class_name)
+            save_class_path = os.path.join(save_folder, class_name)
+            if not os.path.exists(save_class_path):
+                os.makedirs(save_class_path)
+            for spec_img in os.listdir(class_path):
+                if spec_img.endswith('mat'):
+                    save_np_path = os.path.join(save_class_path, spec_img[:-4]+'.npy')
+                    # print(save_np_path)
+                    ary = sio.loadmat(os.path.join(class_path, spec_img))["x_o"].astype(np.float32)
+                    np.save(save_np_path, ary)
+                    count += 1
+                    if count % 1000 == 999:
+                        print("Processed:", count+1)
 
     @classmethod
     def split_dataset(cls, path, dataset_name, split_rate=[0.8,0.1,0.1], class_names=None):
