@@ -156,7 +156,7 @@ class SpectrogramDataset(Dataset):
                     ary = sio.loadmat(os.path.join(class_path, spec_img))["x_o"].astype(np.float32)
                     np.save(save_np_path, ary)
                     count += 1
-                    if count % 1000 == 999:
+                    if count % 5000 == 4999:
                         print("Processed:", count+1)
 
     @classmethod

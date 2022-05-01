@@ -6,10 +6,12 @@ import torch
 import os
 
 
-
-
 def train_val_plot(train_history, val_history, 
-        save_path=None, title='Training Loss and Validation Accuracy'):
+        save_path=None,
+        show_img=None,
+        title='Training Loss and Validation Accuracy', 
+        y_label_1="Training Loss",
+        y_label_2="Val Accuracy"):
     """
     Plotting training loss and validation accuracy togather.
 
@@ -31,7 +33,7 @@ def train_val_plot(train_history, val_history,
     # set x-axis label
     ax.set_xlabel("Training Batches",fontsize=14)
     # set y-axis label
-    ax.set_ylabel("Training Loss",color="steelblue",fontsize=14)
+    ax.set_ylabel(y_label_1,color="steelblue",fontsize=14)
 
     # x axis of validation accuracy
     val_x = [n_batch*i for i in range(n_epoch)]
@@ -42,9 +44,10 @@ def train_val_plot(train_history, val_history,
     ax2=ax.twinx()
     # make a plot with different y-axis using second axis object
     ax2.plot(val_x, val_history,color="darkorange")
-    ax2.set_ylabel("Val Accuracy",color="darkorange",fontsize=14)
-
-    plt.show()
+    ax2.set_ylabel(y_label_2,color="darkorange",fontsize=14)
+    
+    if show_img:
+        plt.show()
 
     # save the plot as a file
     if save_path:
@@ -52,4 +55,6 @@ def train_val_plot(train_history, val_history,
                     format='jpeg',
                     dpi=100,
                     bbox_inches='tight')
+
+
 

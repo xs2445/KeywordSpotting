@@ -53,7 +53,7 @@ class SpeechResModel(SerializableModule):
         self.output = nn.Linear(n_maps, n_labels)
 
     def forward(self, x):
-        # x = x.unsqueeze(1)
+        x = x.unsqueeze(1)
         # x = F.normalize(x)
         # print(x)
         for i in range(self.n_layers + 1):
