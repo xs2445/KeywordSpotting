@@ -13,19 +13,31 @@ from utils.logger import logger
 
 
 path = "/home/jupyter/6692/project/data/speech_commands_v1/imgs"
-num_list = [1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,15000,20000]
+
+# f_c_max
+# num_list = [1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,15000,20000]
+# DATASET_NAME_LIST = []
+# for f_max in num_list:
+#     DATASET_NAME_LIST.append('n32-q3-a1-100-'+str(f_max))
+# LOG_FOLDER = './logs/' + datetime.today().strftime("%Y-%m-%d")
+
+# n_filter
+# num_list = [1,4,8,12,16,20,24,28,32,36,40,44,48,52,56,60,64]
+num_list = [40,44,48,52,56,60,64]
+
 DATASET_NAME_LIST = []
-for f_max in num_list:
-    DATASET_NAME_LIST.append('n32-q3-a1-100-'+str(f_max))
+for n in num_list:
+    DATASET_NAME_LIST.append('n'+str(n)+'-q3-a1-100-4000')
 LOG_FOLDER = './logs/' + datetime.today().strftime("%Y-%m-%d")
 if not os.path.exists(LOG_FOLDER):
     os.makedirs(LOG_FOLDER)
 
+# print(DATASET_NAME_LIST)
+
 # training parameters
 batch_size = 64
-epochs = 15
+epochs = 20
 lr = [1e-3]
-# subset_frac = 0.1
 subset_frac = None
 device = "cuda"
 log_interval = 50
@@ -46,7 +58,7 @@ for dataset_name in DATASET_NAME_LIST:
     model = SpeechResModel(len(train_set.class_names), model_name)
 
     # start training
-    logger(log_file_name, console_print=False)
+    logger(log_file_name, console_print=True)
     print("Date:",datetime.today(), '\n')
     print("Model name:", model_name)
     print("Dataset:", dataset_name)

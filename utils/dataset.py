@@ -60,6 +60,9 @@ class SpectrogramDataset(Dataset):
     def __getitem__(self, index):
         annotation = self.annotations[index]
         spec_img = np.load(annotation['path'])
+        if spec_img.shape[0]<5:
+            wid_pad = (5-spec_img.shape[0]+1)//2
+            spec_img = np.pad(spec_img, ((wid_pad,wid_pad)))
         
         return torch.tensor(spec_img), annotation['class_index']
 
