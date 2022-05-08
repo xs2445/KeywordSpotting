@@ -1,0 +1,282 @@
+Date: 2022-05-07 14:28:53.788580 
+
+Model name: res15
+Dataset: n32-q9-a1-100-4000
+Input shape: (32, 100)
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1          [-1, 45, 32, 100]             405
+            Conv2d-2          [-1, 45, 32, 100]          18,225
+       BatchNorm2d-3          [-1, 45, 32, 100]               0
+            Conv2d-4          [-1, 45, 32, 100]          18,225
+       BatchNorm2d-5          [-1, 45, 32, 100]               0
+            Conv2d-6          [-1, 45, 32, 100]          18,225
+       BatchNorm2d-7          [-1, 45, 32, 100]               0
+            Conv2d-8          [-1, 45, 32, 100]          18,225
+       BatchNorm2d-9          [-1, 45, 32, 100]               0
+           Conv2d-10          [-1, 45, 32, 100]          18,225
+      BatchNorm2d-11          [-1, 45, 32, 100]               0
+           Conv2d-12          [-1, 45, 32, 100]          18,225
+      BatchNorm2d-13          [-1, 45, 32, 100]               0
+           Conv2d-14          [-1, 45, 32, 100]          18,225
+      BatchNorm2d-15          [-1, 45, 32, 100]               0
+           Conv2d-16          [-1, 45, 32, 100]          18,225
+      BatchNorm2d-17          [-1, 45, 32, 100]               0
+           Conv2d-18          [-1, 45, 32, 100]          18,225
+      BatchNorm2d-19          [-1, 45, 32, 100]               0
+           Conv2d-20          [-1, 45, 32, 100]          18,225
+      BatchNorm2d-21          [-1, 45, 32, 100]               0
+           Conv2d-22          [-1, 45, 32, 100]          18,225
+      BatchNorm2d-23          [-1, 45, 32, 100]               0
+           Conv2d-24          [-1, 45, 32, 100]          18,225
+      BatchNorm2d-25          [-1, 45, 32, 100]               0
+           Conv2d-26          [-1, 45, 32, 100]          18,225
+      BatchNorm2d-27          [-1, 45, 32, 100]               0
+           Linear-28                   [-1, 10]             460
+================================================================
+Total params: 237,790
+Trainable params: 237,790
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.01
+Forward/backward pass size (MB): 29.66
+Params size (MB): 0.91
+Estimated Total Size (MB): 30.58
+----------------------------------------------------------------
+traning sample:18945
+validation sample:2369
+testing sample:2368
+
+Using gpu: Tesla K80
+Training epoches: 20
+Training batches: 296
+
+Epoch: 1
+train step #0/296 acc: 0.125000, loss: 2.336731
+train step #50/296 acc: 0.718750, loss: 1.260037
+train step #100/296 acc: 0.781250, loss: 0.752603
+train step #150/296 acc: 0.843750, loss: 0.597506
+train step #200/296 acc: 0.796875, loss: 0.604446
+train step #250/296 acc: 0.906250, loss: 0.367130
+Validation acc: 0.867599, loss: 0.406453
+saving best model ...
+Test acc: 0.875845, loss: 0.411605
+Cost time:278.133844s
+
+Epoch: 2
+train step #0/296 acc: 0.921875, loss: 0.338586
+train step #50/296 acc: 0.953125, loss: 0.214434
+train step #100/296 acc: 0.937500, loss: 0.215769
+train step #150/296 acc: 0.953125, loss: 0.194742
+train step #200/296 acc: 0.906250, loss: 0.296076
+train step #250/296 acc: 0.953125, loss: 0.122480
+Validation acc: 0.928043, loss: 0.221810
+saving best model ...
+Test acc: 0.928209, loss: 0.225794
+Cost time:183.186105s
+
+Epoch: 3
+train step #0/296 acc: 0.937500, loss: 0.291596
+train step #50/296 acc: 0.968750, loss: 0.112046
+train step #100/296 acc: 0.953125, loss: 0.156392
+train step #150/296 acc: 0.953125, loss: 0.169099
+train step #200/296 acc: 0.937500, loss: 0.217416
+train step #250/296 acc: 0.984375, loss: 0.100681
+Validation acc: 0.902138, loss: 0.280746
+Test acc: 0.902449, loss: 0.291868
+Cost time:156.750711s
+
+Epoch: 4
+train step #0/296 acc: 0.953125, loss: 0.290129
+train step #50/296 acc: 1.000000, loss: 0.082056
+train step #100/296 acc: 0.953125, loss: 0.166902
+train step #150/296 acc: 0.953125, loss: 0.150172
+train step #200/296 acc: 0.937500, loss: 0.213309
+train step #250/296 acc: 0.984375, loss: 0.063651
+Validation acc: 0.949836, loss: 0.167927
+saving best model ...
+Test acc: 0.944257, loss: 0.176371
+Cost time:156.125995s
+
+Epoch: 5
+train step #0/296 acc: 0.921875, loss: 0.220812
+train step #50/296 acc: 0.984375, loss: 0.075928
+train step #100/296 acc: 0.953125, loss: 0.139268
+train step #150/296 acc: 0.984375, loss: 0.057330
+train step #200/296 acc: 0.937500, loss: 0.183351
+train step #250/296 acc: 0.984375, loss: 0.048624
+Validation acc: 0.923520, loss: 0.222295
+Test acc: 0.919764, loss: 0.234049
+Cost time:156.473206s
+
+Epoch: 6
+train step #0/296 acc: 0.953125, loss: 0.238987
+train step #50/296 acc: 0.984375, loss: 0.068835
+train step #100/296 acc: 0.953125, loss: 0.130507
+train step #150/296 acc: 0.984375, loss: 0.082891
+train step #200/296 acc: 0.937500, loss: 0.160199
+train step #250/296 acc: 1.000000, loss: 0.038567
+Validation acc: 0.919819, loss: 0.258358
+Test acc: 0.909206, loss: 0.265554
+Cost time:156.167791s
+
+Epoch: 7
+train step #0/296 acc: 0.921875, loss: 0.251532
+train step #50/296 acc: 0.937500, loss: 0.098734
+train step #100/296 acc: 0.953125, loss: 0.211210
+train step #150/296 acc: 0.953125, loss: 0.094322
+train step #200/296 acc: 0.937500, loss: 0.149069
+train step #250/296 acc: 0.968750, loss: 0.080679
+Validation acc: 0.949013, loss: 0.174111
+Test acc: 0.942568, loss: 0.180136
+Cost time:156.846894s
+
+Epoch: 8
+train step #0/296 acc: 0.953125, loss: 0.249219
+train step #50/296 acc: 0.968750, loss: 0.068293
+train step #100/296 acc: 0.953125, loss: 0.181568
+train step #150/296 acc: 0.968750, loss: 0.099500
+train step #200/296 acc: 0.937500, loss: 0.167170
+train step #250/296 acc: 0.984375, loss: 0.059073
+Validation acc: 0.956003, loss: 0.144945
+saving best model ...
+Test acc: 0.954814, loss: 0.146818
+Cost time:167.413244s
+
+Epoch: 9
+train step #0/296 acc: 0.937500, loss: 0.229917
+train step #50/296 acc: 0.968750, loss: 0.070881
+train step #100/296 acc: 0.953125, loss: 0.180426
+train step #150/296 acc: 0.968750, loss: 0.096008
+train step #200/296 acc: 0.921875, loss: 0.160809
+train step #250/296 acc: 1.000000, loss: 0.010402
+Validation acc: 0.949013, loss: 0.158359
+Test acc: 0.945101, loss: 0.177807
+Cost time:171.165189s
+
+Epoch: 10
+train step #0/296 acc: 0.968750, loss: 0.161523
+train step #50/296 acc: 0.968750, loss: 0.084340
+train step #100/296 acc: 0.953125, loss: 0.140635
+train step #150/296 acc: 0.984375, loss: 0.069378
+train step #200/296 acc: 0.953125, loss: 0.138111
+train step #250/296 acc: 1.000000, loss: 0.018031
+Validation acc: 0.953947, loss: 0.156880
+Test acc: 0.948902, loss: 0.176633
+Cost time:167.135266s
+
+Epoch: 11
+train step #0/296 acc: 0.968750, loss: 0.150789
+train step #50/296 acc: 0.953125, loss: 0.108293
+train step #100/296 acc: 0.953125, loss: 0.100675
+train step #150/296 acc: 0.984375, loss: 0.050916
+train step #200/296 acc: 0.953125, loss: 0.139804
+train step #250/296 acc: 1.000000, loss: 0.008295
+Validation acc: 0.962582, loss: 0.136898
+saving best model ...
+Test acc: 0.956503, loss: 0.150960
+Cost time:164.998699s
+
+Epoch: 12
+train step #0/296 acc: 0.968750, loss: 0.105832
+train step #50/296 acc: 1.000000, loss: 0.036802
+train step #100/296 acc: 0.968750, loss: 0.151213
+train step #150/296 acc: 1.000000, loss: 0.021230
+train step #200/296 acc: 0.953125, loss: 0.135219
+train step #250/296 acc: 1.000000, loss: 0.010701
+Validation acc: 0.951069, loss: 0.176236
+Test acc: 0.948902, loss: 0.194609
+Cost time:158.185501s
+
+Epoch: 13
+train step #0/296 acc: 0.968750, loss: 0.153647
+train step #50/296 acc: 0.984375, loss: 0.043988
+train step #100/296 acc: 0.953125, loss: 0.091916
+train step #150/296 acc: 1.000000, loss: 0.010822
+train step #200/296 acc: 0.937500, loss: 0.150285
+train step #250/296 acc: 1.000000, loss: 0.006955
+Validation acc: 0.960526, loss: 0.135633
+Test acc: 0.953970, loss: 0.150340
+Cost time:156.383249s
+
+Epoch: 14
+train step #0/296 acc: 0.984375, loss: 0.083605
+train step #50/296 acc: 1.000000, loss: 0.035467
+train step #100/296 acc: 0.953125, loss: 0.151607
+train step #150/296 acc: 0.984375, loss: 0.018390
+train step #200/296 acc: 0.953125, loss: 0.147049
+train step #250/296 acc: 0.984375, loss: 0.040293
+Validation acc: 0.958882, loss: 0.130081
+Test acc: 0.955659, loss: 0.156966
+Cost time:156.415237s
+
+Epoch: 15
+train step #0/296 acc: 0.953125, loss: 0.189078
+train step #50/296 acc: 0.968750, loss: 0.053426
+train step #100/296 acc: 0.968750, loss: 0.087568
+train step #150/296 acc: 0.984375, loss: 0.056916
+train step #200/296 acc: 0.953125, loss: 0.124435
+train step #250/296 acc: 1.000000, loss: 0.005689
+Validation acc: 0.955181, loss: 0.143212
+Test acc: 0.953547, loss: 0.174042
+Cost time:156.572577s
+
+Epoch: 16
+train step #0/296 acc: 0.984375, loss: 0.086804
+train step #50/296 acc: 0.984375, loss: 0.045850
+train step #100/296 acc: 0.968750, loss: 0.107439
+train step #150/296 acc: 0.984375, loss: 0.036568
+train step #200/296 acc: 0.953125, loss: 0.130261
+train step #250/296 acc: 1.000000, loss: 0.006432
+Validation acc: 0.963405, loss: 0.145758
+saving best model ...
+Test acc: 0.961149, loss: 0.161375
+Cost time:155.998461s
+
+Epoch: 17
+train step #0/296 acc: 0.984375, loss: 0.049842
+train step #50/296 acc: 0.984375, loss: 0.047027
+train step #100/296 acc: 0.968750, loss: 0.109116
+train step #150/296 acc: 0.984375, loss: 0.022664
+train step #200/296 acc: 0.953125, loss: 0.149786
+train step #250/296 acc: 1.000000, loss: 0.001180
+Validation acc: 0.958470, loss: 0.145599
+Test acc: 0.956503, loss: 0.177114
+Cost time:156.389383s
+
+Epoch: 18
+train step #0/296 acc: 0.968750, loss: 0.061260
+train step #50/296 acc: 0.984375, loss: 0.042627
+train step #100/296 acc: 0.968750, loss: 0.090831
+train step #150/296 acc: 0.984375, loss: 0.024430
+train step #200/296 acc: 0.953125, loss: 0.125769
+train step #250/296 acc: 1.000000, loss: 0.001904
+Validation acc: 0.955592, loss: 0.156503
+Test acc: 0.948902, loss: 0.197935
+Cost time:156.383513s
+
+Epoch: 19
+train step #0/296 acc: 0.984375, loss: 0.064308
+train step #50/296 acc: 0.984375, loss: 0.052099
+train step #100/296 acc: 0.968750, loss: 0.096518
+train step #150/296 acc: 1.000000, loss: 0.003492
+train step #200/296 acc: 0.953125, loss: 0.166279
+train step #250/296 acc: 1.000000, loss: 0.007620
+Validation acc: 0.962582, loss: 0.152271
+Test acc: 0.953547, loss: 0.168779
+Cost time:156.381485s
+
+Epoch: 20
+train step #0/296 acc: 0.984375, loss: 0.032439
+train step #50/296 acc: 0.984375, loss: 0.045608
+train step #100/296 acc: 0.968750, loss: 0.106216
+train step #150/296 acc: 1.000000, loss: 0.006738
+train step #200/296 acc: 0.953125, loss: 0.187794
+train step #250/296 acc: 1.000000, loss: 0.003960
+Validation acc: 0.947780, loss: 0.189843
+Test acc: 0.946368, loss: 0.220554
+Cost time:156.357610s
+
+Test acc: 0.961149, loss: 0.161375
+Best validation acc:0.963405
