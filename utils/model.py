@@ -35,12 +35,14 @@ class SpeechResModel(SerializableModule):
         self.model_name = model_type
         n_labels = config["n_labels"]
         n_maps = config["n_feature_maps"]
+        # the first convolution layer, the n_input channel = 1
         self.conv0 = nn.Conv2d(1, n_maps, (3, 3), padding=(1, 1), bias=False)
         if "res_pool" in config:
             self.pool = nn.AvgPool2d(config["res_pool"])
-
+        # number of layers in resnet, two layers for one "block"
         self.n_layers = n_layers = config["n_layers"]
         dilation = config["use_dilation"]
+        # dilation was not used in this project
         if dilation:
             self.convs = [nn.Conv2d(n_maps, n_maps, (3, 3), padding=int(2**(i // 3)), dilation=int(2**(i // 3)),
                 bias=False) for i in range(n_layers)]
@@ -54,8 +56,6 @@ class SpeechResModel(SerializableModule):
 
     def forward(self, x):
         x = x.unsqueeze(1)
-        # x = F.normalize(x)
-        # print(x)
         for i in range(self.n_layers + 1):
             y = F.relu(getattr(self, "conv{}".format(i))(x))
             # y = F.sigmoid(getattr(self, "conv{}".format(i))(x))
@@ -63,6 +63,7 @@ class SpeechResModel(SerializableModule):
                 if hasattr(self, "pool"):
                     y = self.pool(y)
                 old_x = y
+            # the "block" of resnet
             if i > 0 and i % 2 == 0:
                 x = y + old_x
                 old_x = x

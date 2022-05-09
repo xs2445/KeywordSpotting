@@ -1,4 +1,5 @@
 from mimetypes import init
+from tangled_up_in_unicode import script_abbr
 import torch
 import torchaudio
 import torchaudio.functional as F
@@ -50,6 +51,45 @@ def play_audio(waveform, sample_rate):
         display(Audio((waveform[0], waveform[1]), rate=sample_rate))
     else:
         raise ValueError("Waveform with more than 2 channels are not supported.")
+
+
+def plot_waveform(waveform, word, save_path=None):
+    """
+    plot waveform
+    """
+    plt.figure(figsize=(6,4))
+    plt.plot(waveform[0])
+    plt.title('Sample Waveform of "{}"'.format(word))
+    plt.grid()
+    plt.xlabel('time(s)')
+    plt.ylabel('amplitude')
+    ms_interval = 100
+    n_inter = 1000//ms_interval
+    axis_x = [x*16000//n_inter for x in range(n_inter+1)]
+    # axis_xx = [x*n_inter for x in range(n_inter+1)]
+    axis_xx = [x/n_inter for x in range(n_inter+1)]
+    plt.xticks(axis_x, axis_xx)
+    if save_path:
+        plt.savefig(save_path)
+    plt.show()
+
+
+def plot_spectrogram_mat(spec_img, word, save_path=None):
+    """
+    plot spectrogram from matlab
+    """
+    plt.figure(figsize=(6,4))
+    plt.imshow(spec_img)
+    plt.title('Sample Mel-Spectrogram of "{}"'.format(word))
+    plt.xlabel('time(s)')
+    plt.ylabel('freq_bin')
+    axis_x = [x*10 for x in range(10+1)]
+    axis_xx = [x/10 for x in range(10+1)]
+    print(axis_x,axis_xx)
+    plt.xticks(axis_x, axis_xx)
+    if save_path:
+        plt.savefig(save_path)
+    plt.show()
 
 
 def plot_spectrogram(spec, title=None, ylabel="freq_bin", aspect="auto", xmax=None):
