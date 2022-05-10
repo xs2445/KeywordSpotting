@@ -36,6 +36,8 @@ Run: `pyhon train_model.py`
 
 ## Logs
 
+Results are shown in `show_result.ipynb`
+
 The full log was recorded in `./logs`
 
 ## Structure of this repo:
