@@ -1,5 +1,7 @@
-torch
-torchaudio
-librosa
-numpy
-matplotlib
+torch>=1.10.0
+torchaudio>=0.10.0
+torchsummary==1.5.1
+librosa>=0.6.2,<=0.6.3
+numpy>=1.12
+matplotlib>=3.5.1
+tqdm>=4.62.3
