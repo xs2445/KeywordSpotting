@@ -1,5 +1,3 @@
-from mimetypes import init
-from tangled_up_in_unicode import script_abbr
 import torch
 import torchaudio
 import torchaudio.functional as F
@@ -9,7 +7,6 @@ import os
 import glob
 
 import matplotlib.pyplot as plt
-import requests
 from IPython.display import Audio, display
 
 import librosa
